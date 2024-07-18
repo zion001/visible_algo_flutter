@@ -1,0 +1,2 @@
+static const home = '/home';
+static const shareTheMoney = '/share_the_money';

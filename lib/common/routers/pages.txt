@@ -1,0 +1,9 @@
+
+      GetPage(
+        name: RouteNames.home,
+        page: () => const HomePage(),
+      ),
+      GetPage(
+        name: RouteNames.shareTheMoney,
+        page: () => const ShareTheMoneyPage(),
+      ),
