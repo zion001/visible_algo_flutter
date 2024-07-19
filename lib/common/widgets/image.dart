@@ -96,7 +96,7 @@ class ImageWidget extends StatelessWidget {
   Widget get _placeholder =>
       placeholder ??
       IconWidget.image(
-        'assets/images/default.png',
+        'assets/images/default.jpg',
         size: 36,
       );
 

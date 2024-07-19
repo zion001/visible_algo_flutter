@@ -48,9 +48,14 @@ dependencies:
   flutter_svg: ^2.0.10+1
   # 角标
   badges: ^3.1.2
+  # 图片强化功能
   extended_image: ^8.1.1
+  # LOADING弹框
   flutter_easyloading: ^3.0.5
+  # 间隔
   gap: ^3.0.1
+  # 启动页
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -78,8 +83,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/fonts/
-    - assets/gifs/
+#    - assets/fonts/
+#    - assets/gifs/
 
 # app 图标 step1: flutter packages get， step2:flutter pub run flutter_launcher_icons_maker:main -f pubspec.yaml
 flutter_icons:
