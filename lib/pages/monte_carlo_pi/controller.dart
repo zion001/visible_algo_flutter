@@ -11,8 +11,15 @@ class MyPoint {
   bool isIncluded() {
     var centerX = paintSize / 2;
     var centerY = centerX;
-    return (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) <= centerX * centerX;
+    return (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) <=
+        centerX * centerX;
   }
+}
+
+class EstimatedPi {
+  var pi = 0.0;
+  var index = 0;
+  EstimatedPi({required this.pi, required this.index});
 }
 
 class MonteCarloPiController extends GetxController {
@@ -21,19 +28,21 @@ class MonteCarloPiController extends GetxController {
 
   // 随机生成的数据坐标
   List<MyPoint> listPoints = <MyPoint>[];
+  // 预估PI值，用于画图表
+  List<EstimatedPi> listPi = <EstimatedPi>[];
 
   // 总的随机个数
-  var totalCount = 10000;
+  var totalCount = 5000;
 
   // 圆内数量
-  var inCnt = 0.obs;
+  var inCnt = 0;
   // 圆外数量
-  var outCnt = 0.obs;
+  var outCnt = 0;
   // 近似Pi
-  var estimatedPi = 0.0.obs;
+  var estimatedPi = 0.0;
 
   // 是否运行中
-  var isRunning = false.obs;
+  var isRunning = false;
 
   MonteCarloPiController();
 
@@ -61,48 +70,59 @@ class MonteCarloPiController extends GetxController {
 
   //开始执行
   void onExecuteTapped() {
-    isRunning.value = !isRunning.value;
+    isRunning = !isRunning;
 
     // 重置数据
-    if (isRunning.value) {
+    if (isRunning) {
       listPoints.clear();
-      inCnt.value = 0;
-      outCnt.value = 0;
-      estimatedPi.value = 0;
+      inCnt = 0;
+      outCnt = 0;
+      estimatedPi = 0;
+      listPi.clear();
     }
 
+    int indexPi = 0; // 用于标记Pi值的INDEX
     var random = Random();
     Future.delayed(Duration.zero, () async {
       for (int i = 0; i < totalCount; ++i) {
         double x = random.nextDouble() * paintSize;
         double y = random.nextDouble() * paintSize;
         MyPoint pt = MyPoint(x: x, y: y);
-        listPoints.add( pt );
+        listPoints.add(pt);
         if (pt.isIncluded()) {
-          inCnt.value += 1;
+          inCnt += 1;
         } else {
-          outCnt.value += 1;
+          outCnt += 1;
         }
-        estimatedPi.value = 4 * inCnt.value / listPoints.length;
+        estimatedPi = 4 * inCnt / listPoints.length;
+
+        // 每10个值，存一个PI值
+        if (listPoints.length == 1 || listPoints.length % 10 == 0) {
+          listPi.add( EstimatedPi(pi: estimatedPi, index: indexPi) );
+          indexPi += 1;
+        }
 
         if (listPoints.length < 100) {
           update(["monte_carlo_pi"]);
-        } else if (listPoints.length >= 100 && listPoints.length < 1000 && listPoints.length % 5 == 0) {
-            update(["monte_carlo_pi"]);
-        }  else if (listPoints.length >= 1000 && listPoints.length < 5000 && listPoints.length % 20 == 0) {
-            update(["monte_carlo_pi"]);
+        } else if (listPoints.length >= 100 &&
+            listPoints.length < 1000 &&
+            listPoints.length % 5 == 0) {
+          update(["monte_carlo_pi"]);
+        } else if (listPoints.length >= 1000 &&
+            listPoints.length < 5000 &&
+            listPoints.length % 20 == 0) {
+          update(["monte_carlo_pi"]);
         } else if (listPoints.length >= 5000 && listPoints.length % 100 == 0) {
-            update(["monte_carlo_pi"]);
+          update(["monte_carlo_pi"]);
         }
-        
 
         await Future.delayed(const Duration(milliseconds: 20));
 
-        if ( !isRunning.value ) {
+        if (!isRunning) {
           return;
         }
       }
-      isRunning.value = false;
+      isRunning = false;
     });
   }
 }

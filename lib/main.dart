@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/route_manager.dart';
 import 'package:visible_algo_flutter/common/index.dart';
-import 'package:visible_algo_flutter/common/routers/index.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:visible_algo_flutter/global.dart';
 
