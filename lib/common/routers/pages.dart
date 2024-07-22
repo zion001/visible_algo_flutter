@@ -10,6 +10,10 @@ class RoutePages {
         page: () => const HomePage(),
       ),
       GetPage(
+        name: RouteNames.monteCarloPi,
+        page: () => const MonteCarloPiPage(),
+      ),
+      GetPage(
         name: RouteNames.shareTheMoney,
         page: () => const ShareTheMoneyPage(),
       ),

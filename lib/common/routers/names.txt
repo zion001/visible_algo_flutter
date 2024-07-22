@@ -1,2 +1,3 @@
 static const home = '/home';
+static const monteCarloPi = '/monte_carlo_pi';
 static const shareTheMoney = '/share_the_money';
