@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/route_manager.dart';
 import 'package:visible_algo_flutter/common/index.dart';
 import 'package:visible_algo_flutter/common/routers/index.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:visible_algo_flutter/global.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  initialization(null);
-
+Future<void> main() async {
+  await Global.init();
   runApp(const MyApp());
 }
 
-//启动图延时移除方法
-void initialization(BuildContext? context) async {
-  //延迟3秒
-  await Future.delayed(const Duration(seconds: 3));
-  FlutterNativeSplash.remove();
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      builder: EasyLoading.init(),
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: MaterialTheme.lightScheme(), // ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -33,6 +28,7 @@ class MyApp extends StatelessWidget {
       // 路由
       initialRoute: RouteNames.home,
       getPages: RoutePages.list,
+      
     );
   }
 }

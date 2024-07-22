@@ -35,6 +35,9 @@ class ShareTheMoneyPage extends GetView<ShareTheMoneyController> {
               yValueMapper: (MoneyData money, _) => money.money,
               name: '各人员金钱数',
               dataLabelSettings: const DataLabelSettings(isVisible: false),
+              pointColorMapper: (MoneyData money, _) {
+                return money.money >= 0 ? AppColors.primary : AppColors.error;
+              },
             )
           ],
         ),
@@ -57,6 +60,7 @@ class ShareTheMoneyPage extends GetView<ShareTheMoneyController> {
                   controller: controller.countTextController,
                   hintText: '请输入执行次数',
                   textAlign: TextAlign.end,
+                  keyboardType: TextInputType.number,
                 ),
               ).expanded()),
         ].toRow(),

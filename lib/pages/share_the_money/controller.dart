@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:visible_algo_flutter/common/index.dart';
 import 'package:visible_algo_flutter/pages/share_the_money/index.dart';
 import 'dart:math' as math;
 
@@ -24,7 +26,7 @@ class ShareTheMoneyController extends GetxController {
   });
 
   // 执行倍数
-  var speedList = [1, 5, 10, 20];
+  var speedList = [1, 5, 10, 50, 100];
   // 当前选中的倍数
   var curSpeed = 1.obs;
 
@@ -43,10 +45,10 @@ class ShareTheMoneyController extends GetxController {
 
   void onTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+  }
 
   @override
   void onReady() {
@@ -73,32 +75,48 @@ class ShareTheMoneyController extends GetxController {
   void onExecuteTapped() {
     isRunning.value = !isRunning.value;
 
-    // 重置数据
+    if (isRunning.value) {
+      bool isInt = int.tryParse(countTextController.text) != null;
+      if (!isInt) {
+        Loading.error('请输入正确的执行次数，要求为正整数。');
+        isRunning.value = false;
+        return;
+      }
+    }
+
+    // 如果是运行，就重置数据
+    //  if (isRunning.value) {
     moneyList = List.generate(100, (index) {
       return MoneyData(index, 100);
     });
-    count = int.parse(countTextController.text) ;
+    count = int.parse(countTextController.text);
     curCount.value = 0;
+    //  }
 
     var random = math.Random();
     Future.delayed(Duration.zero, () async {
-      for (int iCount = 0; iCount < count; iCount++) {
-        
-        for (int iPerson = 0; iPerson < 100; iPerson++) {
-          if ( !isAllowNegtive.value && moneyList[iPerson].money <= 0 ) { 
-            // 不允许负数
-            continue;
+      for (curCount.value = 0; curCount.value < count; /*iCount++*/) {
+        // 总次数
+        for (int iSpeed = 0; iSpeed < curSpeed.value; iSpeed++) {
+          // 速度倍率
+          for (int iPerson = 0; iPerson < 100; iPerson++) {
+            if (!isAllowNegtive.value && moneyList[iPerson].money <= 0) {
+              // 不允许负数
+              continue;
+            }
+            int iDest = random.nextInt(100);
+            moneyList[iPerson].money -= 1;
+            moneyList[iDest].money += 1;
+            if (!isRunning.value) {
+              return;
+            }
           }
-          int iDest = random.nextInt(100);
-          moneyList[iPerson].money -= 1;
-          moneyList[iDest].money += 1;
+          curCount.value += 1;
+          // iCount += 1;
         }
         update(["share_the_money"]);
-        curCount += 1;
+        //curCount += 1;
         await Future.delayed(const Duration(milliseconds: 20));
-        if (!isRunning.value) {
-          return;
-        }
       }
       isRunning.value = false;
     });
