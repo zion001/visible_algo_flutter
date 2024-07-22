@@ -5,7 +5,7 @@ import 'index.dart';
 class AppTheme {
   ///亮色
   static ThemeData light = ThemeData(
-    colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+    colorScheme: MaterialTheme.lightScheme(),
     useMaterial3: false,
     appBarTheme:
         const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
@@ -14,7 +14,7 @@ class AppTheme {
   ///暗色
   //static ThemeData dark = Theme
   static ThemeData dark = ThemeData(
-    colorScheme: MaterialTheme.darkScheme().toColorScheme(),
+    colorScheme: MaterialTheme.darkScheme(),
     useMaterial3: false,
     appBarTheme:
         const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),

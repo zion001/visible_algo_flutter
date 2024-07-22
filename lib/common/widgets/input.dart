@@ -75,6 +75,9 @@ class InputWidget extends StatelessWidget {
   /// 内容 padding
   final EdgeInsetsGeometry? contentPadding;
 
+  /// 对齐方式
+  final TextAlign? textAlign;
+
   const InputWidget({
     Key? key,
     this.type = InputWidgetType.none,
@@ -98,6 +101,7 @@ class InputWidget extends StatelessWidget {
     this.borderColor,
     this.borderRadius,
     this.onChanged,
+    this.textAlign,
   }) : super(key: key);
 
   /// 文本输入
@@ -124,6 +128,7 @@ class InputWidget extends StatelessWidget {
     this.borderColor,
     this.borderRadius,
     this.onChanged,
+    this.textAlign,
   }) : super(key: key);
 
   /// 文本输入 - 边框
@@ -150,6 +155,7 @@ class InputWidget extends StatelessWidget {
     this.borderRadius,
     this.controller,
     this.onChanged,
+    this.textAlign,
   }) : super(key: key);
 
   /// 文本输入 - 填充
@@ -176,6 +182,7 @@ class InputWidget extends StatelessWidget {
     this.borderRadius,
     this.onChanged,
     this.controller,
+    this.textAlign,
   })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
         super(key: key);
 
@@ -203,6 +210,7 @@ class InputWidget extends StatelessWidget {
     this.borderRadius,
     this.onChanged,
     this.controller,
+    this.textAlign,
   })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
         super(key: key);
 
@@ -230,6 +238,7 @@ class InputWidget extends StatelessWidget {
     this.borderRadius,
     this.onChanged,
     this.controller,
+    this.textAlign,
   })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
         super(key: key);
 
@@ -257,6 +266,7 @@ class InputWidget extends StatelessWidget {
     this.borderRadius = 11,
     this.onChanged,
     this.controller,
+    this.textAlign,
   })  : icon = icon ??
             IconWidget.icon(
               Icons.search,
@@ -317,6 +327,7 @@ class InputWidget extends StatelessWidget {
       onSubmitted: onSubmitted,
       onChanged: onChanged,
       textInputAction: textInputAction,
+      textAlign: textAlign ?? TextAlign.start,
       style: AppTextStyles.bodyText1?.copyWith(
         fontSize: fontSize,
         fontWeight: FontWeight.w500,

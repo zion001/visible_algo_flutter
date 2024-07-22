@@ -56,6 +56,8 @@ dependencies:
   gap: ^3.0.1
   # 启动页
   flutter_native_splash: ^2.2.16
+  # 图表
+  syncfusion_flutter_charts: ^26.1.42
 
 dev_dependencies:
   flutter_test:
