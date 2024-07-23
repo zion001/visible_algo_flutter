@@ -27,6 +27,12 @@ class HomeController extends GetxController {
           "利用大量数据模拟的方式，求出Pi的近似值。利用大量数据模拟在现实中用途相当广泛。",
       route: RouteNames.monteCarloPi,
     ),
+    Item(
+      title: "迷宫生成及寻路",
+      subTitle:
+          "包含一些常见的迷宫生成算法及寻路算法。",
+      route: RouteNames.maze,
+    ),
   ];
 
   HomeController();

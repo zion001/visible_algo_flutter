@@ -9,6 +9,10 @@ class RoutePages {
         name: RouteNames.home,
         page: () => const HomePage(),
       ),
+            GetPage(
+        name: RouteNames.maze,
+        page: () => const MazePage(),
+      ),
       GetPage(
         name: RouteNames.monteCarloPi,
         page: () => const MonteCarloPiPage(),
