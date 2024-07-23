@@ -11,7 +11,7 @@ class MyPoint {
   bool isIncluded() {
     var centerX = paintSize / 2;
     var centerY = centerX;
-    return (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) <=
+    return (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) <
         centerX * centerX;
   }
 }
@@ -32,7 +32,7 @@ class MonteCarloPiController extends GetxController {
   List<EstimatedPi> listPi = <EstimatedPi>[];
 
   // 总的随机个数
-  var totalCount = 5000;
+  var totalCount = 10000;
 
   // 圆内数量
   var inCnt = 0;
@@ -96,27 +96,15 @@ class MonteCarloPiController extends GetxController {
         }
         estimatedPi = 4 * inCnt / listPoints.length;
 
-        // 每10个值，存一个PI值
-        if (listPoints.length == 1 || listPoints.length % 10 == 0) {
+        // 每20个值，存一个PI值
+        if (listPoints.length == 1 || listPoints.length % 20 == 0) {
           listPi.add( EstimatedPi(pi: estimatedPi, index: indexPi) );
           indexPi += 1;
         }
 
-        if (listPoints.length < 100) {
-          update(["monte_carlo_pi"]);
-        } else if (listPoints.length >= 100 &&
-            listPoints.length < 1000 &&
-            listPoints.length % 5 == 0) {
-          update(["monte_carlo_pi"]);
-        } else if (listPoints.length >= 1000 &&
-            listPoints.length < 5000 &&
-            listPoints.length % 20 == 0) {
-          update(["monte_carlo_pi"]);
-        } else if (listPoints.length >= 5000 && listPoints.length % 100 == 0) {
-          update(["monte_carlo_pi"]);
-        }
+        update(["monte_carlo_pi"]);
 
-        await Future.delayed(const Duration(milliseconds: 20));
+        await Future.delayed(const Duration(milliseconds: 30));
 
         if (!isRunning) {
           return;

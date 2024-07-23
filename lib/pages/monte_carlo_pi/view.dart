@@ -38,11 +38,12 @@ class MonteCarloPiPage extends GetView<MonteCarloPiController> {
             isVisible: false,
             crossesAt: 3.14159, // 将 X 轴放置在 Y 轴的 0 位置
             minimum: 0.0,
-            maximum: controller.totalCount / 10,
+            maximum: controller.totalCount / 20,
           ),
           primaryYAxis: NumericAxis(
-            minimum: 2.5,
-            maximum: 3.5,
+            minimum: 2.8,
+            maximum: 3.4,
+            interval: 0.1,
             plotBands: [
               PlotBand(
                 start: 3.14159,
@@ -53,7 +54,7 @@ class MonteCarloPiPage extends GetView<MonteCarloPiController> {
             ],
           ),
           annotations: [
-            CartesianChartAnnotation(widget: TextWidget.body2('\u03C0', color: AppColors.error,), x: controller.totalCount / 10 - 15, y: 3.18, coordinateUnit: CoordinateUnit.point,),
+            CartesianChartAnnotation(widget: TextWidget.body2('\u03C0', color: AppColors.error,), x: controller.totalCount / 20 - 15, y: 3.18, coordinateUnit: CoordinateUnit.point,),
           ],
           legend: const Legend(isVisible: false),
           tooltipBehavior: TooltipBehavior(enable: true),
@@ -127,6 +128,20 @@ class MyPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+     if (listPoints.length < 100) {
+          return true;
+        } else if (listPoints.length >= 100 &&
+            listPoints.length < 1000 &&
+            listPoints.length % 5 == 0) {
+          return true;
+        } else if (listPoints.length >= 1000 &&
+            listPoints.length < 5000 &&
+            listPoints.length % 20 == 0) {
+          return true;
+        } else if (listPoints.length >= 5000 && listPoints.length % 100 == 0) {
+          return true;
+        }
+
+    return false;
   }
 }
