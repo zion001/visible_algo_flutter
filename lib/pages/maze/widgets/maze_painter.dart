@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:visible_algo_flutter/common/index.dart';
 import 'package:visible_algo_flutter/pages/index.dart';
 
 class MazePainter extends CustomPainter {
@@ -38,6 +41,14 @@ class MazePainter extends CustomPainter {
         );
       }
     }
+    // 标记起点和终点
+    Offset entry = Offset(cellSize / 2, cellSize / 2);
+    Offset exit = Offset(size.width - cellSize / 2, size.height - cellSize / 2);
+    canvas.drawPoints(PointMode.points, [entry, exit], Paint()
+      ..color = Colors.green // AppColors.primary
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = cellSize * 0.7);
+
   }
 
   // 画一个单元格canvas: 画布 cell:单元格数据 cellSize:单元格大小 offset:左上角坐标 paint

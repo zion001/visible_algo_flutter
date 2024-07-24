@@ -136,6 +136,7 @@ class MyPainter extends CustomPainter {
       inOffsets,
       Paint()
         ..color = AppColors.primary
+        ..strokeCap = StrokeCap.round
         ..strokeWidth = 1.0,
     );
     canvas.drawPoints(
@@ -143,6 +144,7 @@ class MyPainter extends CustomPainter {
       outOffsets,
       Paint()
         ..color = AppColors.error
+        ..strokeCap = StrokeCap.round
         ..strokeWidth = 1.0,
     );
   }

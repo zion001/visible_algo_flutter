@@ -28,32 +28,46 @@ class MazePage extends GetView<MazeController> {
           color: AppColors.primary,
         ),
       ),
-      const Divider(thickness: 0.5,),
+      const Divider(
+        thickness: 0.5,
+      ),
       [
-        [const TextWidget.body2('地图大小'),
-        Gap(AppSpace.button),
-        IgnorePointer(
-                ignoring: controller.isMapCreating,
-                child: DropdownButton(
-                  value: controller.selMapSize,
-                  items: controller.listMapSize.map((size) {
-                    return DropdownMenuItem(
-                      value: size,
-                      child: TextWidget.body2('$size').center(),
-                    );
-                  }).toList(),
-                  underline: null,
-                  onChanged: (size) {
-                    controller.setMapSize(size ?? controller.listMapSize.first);
-                  },
-                ),
-              ),].toRow(),
+        [
+          const TextWidget.body2('地图大小'),
+          Gap(AppSpace.button),
+          IgnorePointer(
+            ignoring: controller.isMapCreating,
+            child: DropdownButton(
+              value: controller.selMapSize,
+              items: controller.listMapSize.map((size) {
+                return DropdownMenuItem(
+                  value: size,
+                  child: TextWidget.body2('$size').center(),
+                );
+              }).toList(),
+              underline: null,
+              onChanged: (size) {
+                //controller.setMapSize(size ?? controller.listMapSize.first);
+                controller.createMapSize(
+                    size: size ?? controller.listMapSize.first);
+              },
+            ),
+          ),
+        ].toRow(),
         const TextWidget.body2('生成算法'),
-        ButtonWidget.textFilled('生成地图', textColor: Colors.white, onTap: controller.createMapData,),
+        IgnorePointer(
+          ignoring: controller.isMapCreating,
+          child: ButtonWidget.textFilled(
+            controller.isMapCreating ? '生成中' : '生成地图',
+            textColor: Colors.white,
+            bgColor: controller.isMapCreating ? AppColors.error : AppColors.primary,
+            onTap: controller.createMapData,
+          ),
+        ),
       ].toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween),
-
-      const Divider(thickness: 0.5,),
-
+      const Divider(
+        thickness: 0.5,
+      ),
     ].toListView().paddingHorizontal(AppSpace.page);
   }
 
