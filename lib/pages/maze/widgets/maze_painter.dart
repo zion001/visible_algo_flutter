@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,11 +10,15 @@ class MazePainter extends CustomPainter {
   Color wallColor; // 墙壁颜色
 
   List<List<MapCell>> mapCells; // 地图数据
+  List<Point<int>> tempSearchPath; // 搜索暂存路径
+  List<Point<int>> failedSearchPath; // 搜索失败路径
 
   MazePainter({
     this.wallWidth = 1.5,
     this.wallColor = Colors.black,
     required this.mapCells,
+    required this.tempSearchPath,
+    required this.failedSearchPath,
   });
 
   @override
@@ -46,6 +51,22 @@ class MazePainter extends CustomPainter {
     Offset exit = Offset(size.width - cellSize / 2, size.height - cellSize / 2);
     canvas.drawPoints(PointMode.points, [entry, exit], Paint()
       ..color = Colors.green // AppColors.primary
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = cellSize * 0.7);
+    // 标记暂存路径
+    var tempPathPoints = tempSearchPath.map( (pt){
+      return Offset(pt.x * cellSize + cellSize / 2, pt.y * cellSize + cellSize / 2);
+    }).toList();
+    canvas.drawPoints(PointMode.points, tempPathPoints, Paint()
+      ..color = Colors.orangeAccent // AppColors.primary
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = cellSize * 0.7);
+    // 标记失败路径
+    var faliedPathPoints = failedSearchPath.map( (pt){
+      return Offset(pt.x * cellSize + cellSize / 2, pt.y * cellSize + cellSize / 2);
+    }).toList();
+    canvas.drawPoints(PointMode.points, faliedPathPoints, Paint()
+      ..color = Colors.black26 // AppColors.primary
       ..strokeCap = StrokeCap.round
       ..strokeWidth = cellSize * 0.7);
 

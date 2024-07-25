@@ -21,7 +21,11 @@ class MazePage extends GetView<MazeController> {
           width: controller.paintSize,
           height: controller.paintSize,
           child: CustomPaint(
-            painter: MazePainter(mapCells: controller.mapCells),
+            painter: MazePainter(
+              mapCells: controller.mapCells,
+              tempSearchPath: controller.tempSearchPath,
+              failedSearchPath: controller.failedSearchPath,
+            ),
           ),
         ).border(
           all: 0.8,
@@ -60,7 +64,8 @@ class MazePage extends GetView<MazeController> {
           child: ButtonWidget.textFilled(
             controller.isMapCreating ? '生成中' : '生成地图',
             textColor: Colors.white,
-            bgColor: controller.isMapCreating ? AppColors.error : AppColors.primary,
+            bgColor:
+                controller.isMapCreating ? AppColors.error : AppColors.primary,
             onTap: controller.createMapData,
           ),
         ),
@@ -68,6 +73,7 @@ class MazePage extends GetView<MazeController> {
       const Divider(
         thickness: 0.5,
       ),
+      ButtonWidget.textFilled('寻找路径', textColor: Colors.white, height: 40, onTap: controller.searchPath,),
     ].toListView().paddingHorizontal(AppSpace.page);
   }
 

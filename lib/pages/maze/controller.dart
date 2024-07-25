@@ -1,6 +1,10 @@
+import 'dart:math';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:get/get.dart';
 import 'package:visible_algo_flutter/common/index.dart';
 import 'package:visible_algo_flutter/pages/maze/map_algorithm/random_prim/random_prim.dart';
+import 'package:visible_algo_flutter/pages/maze/path_algorithm/deep_first_path/deep_first_path.dart';
 
 // 生成地图算法
 enum MapCreateAlgorithm {
@@ -45,14 +49,20 @@ class MazeController extends GetxController {
   // 画布Size
   double paintSize = Get.width - AppSpace.page * 2;
   // 地图规模列表
-  List<int> listMapSize = [25, 50, 75];
+  List<int> listMapSize = [10, 25, 50, 75];
   // 当前选中的地图规模
-  int selMapSize = 25;
+  int selMapSize = 10;
   // 算法列表
   List<String> listAlgorithm = ['算法A', '算法B', '算法C', ];
 
   // 是否在生成地图运行中
   bool isMapCreating = false;
+
+
+  // 搜索过程中的暂存路径
+  List<Point<int>> tempSearchPath = [];
+  // 搜索过程中的失败路径
+  List<Point<int>> failedSearchPath = [];
 
   MazeController();
 
@@ -92,6 +102,9 @@ class MazeController extends GetxController {
 
   // 生成地图规模
   void createMapSize({required int size}) {
+    tempSearchPath.clear();
+    failedSearchPath.clear();
+
     selMapSize = size;
     mapCells = List.generate(size, (_) => List.generate(size, (_) => MapCell()) );
     update(["maze"]);
@@ -99,6 +112,9 @@ class MazeController extends GetxController {
 
   //生成地图数据
   void createMapData() {
+    tempSearchPath.clear();
+    failedSearchPath.clear();
+
     createMapSize(size:selMapSize);
     isMapCreating = true;
     RandomPrim().createMapData(mapCells, stepMilliseconds: 3, createCallBack: (cells){
@@ -106,6 +122,21 @@ class MazeController extends GetxController {
       update(["maze"]);
     }, finishCallBack: (){
       isMapCreating = false;
+      update(["maze"]);
+    });
+  }
+
+  //导找路径
+  void searchPath() {
+    DeepFirstPath().searchPath(mapCells, stepMilliseconds: 30, searchCallBack: (List<Point<int>> tempPath, List<Point<int>> failedPath){
+      tempSearchPath = tempPath;
+      failedSearchPath = failedPath;
+      update(["maze"]);
+    }, finishCallBack: (){
+      print("搜索完成");
+      update(["maze"]);
+    }, failedCallBack: (){
+      print("搜索失败");  
       update(["maze"]);
     });
   }
