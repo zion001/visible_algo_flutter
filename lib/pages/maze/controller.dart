@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:get/get.dart';
 import 'package:visible_algo_flutter/common/index.dart';
@@ -56,8 +55,8 @@ class MazeController extends GetxController {
   List<String> listAlgorithm = ['算法A', '算法B', '算法C', ];
 
   // 是否在生成地图运行中
-  bool isMapCreating = false;
-
+  //bool isMapCreating = false;
+  bool isRunning = false;
 
   // 搜索过程中的暂存路径
   List<Point<int>> tempSearchPath = [];
@@ -116,27 +115,30 @@ class MazeController extends GetxController {
     failedSearchPath.clear();
 
     createMapSize(size:selMapSize);
-    isMapCreating = true;
+    isRunning = true;
     RandomPrim().createMapData(mapCells, stepMilliseconds: 3, createCallBack: (cells){
       mapCells = cells;
       update(["maze"]);
     }, finishCallBack: (){
-      isMapCreating = false;
+      isRunning = false;
       update(["maze"]);
     });
   }
 
   //导找路径
   void searchPath() {
+    isRunning = true;
     DeepFirstPath().searchPath(mapCells, stepMilliseconds: 30, searchCallBack: (List<Point<int>> tempPath, List<Point<int>> failedPath){
       tempSearchPath = tempPath;
       failedSearchPath = failedPath;
       update(["maze"]);
     }, finishCallBack: (){
       print("搜索完成");
+      isRunning = false;
       update(["maze"]);
     }, failedCallBack: (){
       print("搜索失败");  
+      isRunning = false;
       update(["maze"]);
     });
   }

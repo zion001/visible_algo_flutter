@@ -40,13 +40,18 @@ class MazePage extends GetView<MazeController> {
           const TextWidget.body2('地图大小'),
           Gap(AppSpace.button),
           IgnorePointer(
-            ignoring: controller.isMapCreating,
+            ignoring: controller.isRunning,
             child: DropdownButton(
               value: controller.selMapSize,
               items: controller.listMapSize.map((size) {
                 return DropdownMenuItem(
                   value: size,
-                  child: TextWidget.body2('$size').center(),
+                  child: TextWidget.body2(
+                    '$size',
+                    color: controller.isRunning
+                        ? Colors.black38
+                        : AppColors.primary,
+                  ).center(),
                 );
               }).toList(),
               underline: null,
@@ -60,12 +65,12 @@ class MazePage extends GetView<MazeController> {
         ].toRow(),
         const TextWidget.body2('生成算法'),
         IgnorePointer(
-          ignoring: controller.isMapCreating,
+          ignoring: controller.isRunning,
           child: ButtonWidget.textFilled(
-            controller.isMapCreating ? '生成中' : '生成地图',
+            //controller.isRunning ? '生成中' : '生成地图',
+            '生成地图',
             textColor: Colors.white,
-            bgColor:
-                controller.isMapCreating ? AppColors.error : AppColors.primary,
+            bgColor: controller.isRunning ? Colors.black38 : AppColors.primary,
             onTap: controller.createMapData,
           ),
         ),
@@ -73,7 +78,13 @@ class MazePage extends GetView<MazeController> {
       const Divider(
         thickness: 0.5,
       ),
-      ButtonWidget.textFilled('寻找路径', textColor: Colors.white, height: 40, onTap: controller.searchPath,),
+      ButtonWidget.textFilled(
+        '寻找路径',
+        textColor: Colors.white,
+        bgColor: controller.isRunning ? Colors.black38 : AppColors.primary,
+        height: 40,
+        onTap: controller.searchPath,
+      ),
     ].toListView().paddingHorizontal(AppSpace.page);
   }
 

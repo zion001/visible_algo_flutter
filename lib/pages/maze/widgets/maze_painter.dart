@@ -32,7 +32,7 @@ class MazePainter extends CustomPainter {
     // 墙壁Painter
     var wallPaint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 1;
+      ..strokeWidth = 0.3;
     for (int i = 0; i < mapCells.length; ++i) {
       for (int j = 0; j < mapCells[i].length; ++j) {
         var cell = mapCells[i][j];
@@ -58,17 +58,17 @@ class MazePainter extends CustomPainter {
       return Offset(pt.x * cellSize + cellSize / 2, pt.y * cellSize + cellSize / 2);
     }).toList();
     canvas.drawPoints(PointMode.points, tempPathPoints, Paint()
-      ..color = Colors.orangeAccent // AppColors.primary
+      ..color = Colors.red // AppColors.primary
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = cellSize * 0.7);
+      ..strokeWidth = cellSize * 0.5);
     // 标记失败路径
     var faliedPathPoints = failedSearchPath.map( (pt){
       return Offset(pt.x * cellSize + cellSize / 2, pt.y * cellSize + cellSize / 2);
     }).toList();
     canvas.drawPoints(PointMode.points, faliedPathPoints, Paint()
-      ..color = Colors.black26 // AppColors.primary
+      ..color = Colors.blueGrey // AppColors.primary
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = cellSize * 0.7);
+      ..strokeWidth = cellSize * 0.5);
 
   }
 
