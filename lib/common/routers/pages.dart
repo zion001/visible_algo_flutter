@@ -21,5 +21,33 @@ class RoutePages {
         name: RouteNames.shareTheMoney,
         page: () => const ShareTheMoneyPage(),
       ),
+      GetPage(
+        name: RouteNames.sortsBubbleSort,
+        page: () => const BubbleSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsGuibingSort,
+        page: () => const GuibingSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsHeapSort,
+        page: () => const HeapSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsInsertSort,
+        page: () => const InsertSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsQuickSort,
+        page: () => const QuickSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsSelectionSort,
+        page: () => const SelectionSortPage(),
+      ),
+      GetPage(
+        name: RouteNames.sortsTwoRoadsQuickSort,
+        page: () => const TwoRoadsQuickSortPage(),
+      ),
   ];
 }

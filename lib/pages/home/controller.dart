@@ -23,15 +23,48 @@ class HomeController extends GetxController {
     ),
     Item(
       title: "蒙特卡洛估算Pi值",
-      subTitle:
-          "利用大量数据模拟的方式，求出Pi的近似值。利用大量数据模拟在现实中用途相当广泛。",
+      subTitle: "利用大量数据模拟的方式，求出Pi的近似值。利用大量数据模拟在现实中用途相当广泛。",
       route: RouteNames.monteCarloPi,
     ),
     Item(
       title: "迷宫生成及寻路",
-      subTitle:
-          "包含一些常见的迷宫生成算法及寻路算法。",
+      subTitle: "包含一些常见的迷宫生成算法及寻路算法。",
       route: RouteNames.maze,
+    ),
+    Item(
+      title: "冒泡排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsBubbleSort,
+    ),
+    Item(
+      title: "归并排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsGuibingSort,
+    ),
+    Item(
+      title: "堆排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsHeapSort,
+    ),
+    Item(
+      title: "插入排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsInsertSort,
+    ),
+    Item(
+      title: "快速排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsQuickSort,
+    ),
+    Item(
+      title: "选择排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsSelectionSort,
+    ),
+    Item(
+      title: "两路归并排序",
+      subTitle: "一种简单的排序方法",
+      route: RouteNames.sortsTwoRoadsQuickSort,
     ),
   ];
 
