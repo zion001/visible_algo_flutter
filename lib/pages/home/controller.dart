@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     ),
     Item(
       title: "冒泡排序",
-      subTitle: "一种简单的排序方法",
+      subTitle: "冒泡排序（Bubble Sort）是一种简单的排序算法，它通过多次遍历待排序的元素，比较相邻元素的大小，并交换它们直到整个序列有序。",
       route: RouteNames.sortsBubbleSort,
     ),
     Item(
