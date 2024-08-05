@@ -37,6 +37,11 @@ class HomeController extends GetxController {
       route: RouteNames.sortsBubbleSort,
     ),
     Item(
+      title: "选择排序",
+      subTitle: "选择排序的基本思想是每次从待排序的列表中选择最小（或最大）的元素，将其与列表中的第一个位置交换，然后继续对剩余的元素进行排序，直到整个列表排序完成。",
+      route: RouteNames.sortsSelectionSort,
+    ),
+    Item(
       title: "归并排序",
       subTitle: "一种简单的排序方法",
       route: RouteNames.sortsGuibingSort,
@@ -55,11 +60,6 @@ class HomeController extends GetxController {
       title: "快速排序",
       subTitle: "一种简单的排序方法",
       route: RouteNames.sortsQuickSort,
-    ),
-    Item(
-      title: "选择排序",
-      subTitle: "一种简单的排序方法",
-      route: RouteNames.sortsSelectionSort,
     ),
     Item(
       title: "两路归并排序",
