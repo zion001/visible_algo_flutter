@@ -46,6 +46,7 @@ class HomeController extends GetxController {
       subTitle: "顾名思义，就是把一个新的元素插入已排好序的数组形成一个新的已排好序的数组。",
       route: RouteNames.sortsInsertSort,
     ),
+    /*
     Item(
       title: "归并排序",
       subTitle: "一种简单的排序方法",
@@ -66,6 +67,7 @@ class HomeController extends GetxController {
       subTitle: "一种简单的排序方法",
       route: RouteNames.sortsTwoRoadsQuickSort,
     ),
+    */
   ];
 
   HomeController();
@@ -95,5 +97,10 @@ class HomeController extends GetxController {
   // 列表被点击
   void onListItemTapped(String route) {
     Get.toNamed(route);
+  }
+
+  // 说明被点击
+  void onAboutTapped() {
+    Get.toNamed(RouteNames.systemAbout);
   }
 }

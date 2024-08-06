@@ -49,5 +49,9 @@ class RoutePages {
         name: RouteNames.sortsTwoRoadsQuickSort,
         page: () => const TwoRoadsQuickSortPage(),
       ),
+      GetPage(
+        name: RouteNames.systemAbout,
+        page: () => const AboutPage(),
+      ),
   ];
 }

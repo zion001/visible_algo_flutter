@@ -12,4 +12,5 @@ class RouteNames {
   static const sortsQuickSort = '/sorts_quick_sort';
   static const sortsSelectionSort = '/sorts_selection_sort';
   static const sortsTwoRoadsQuickSort = '/sorts_two_roads_quick_sort';
+  static const systemAbout = '/system_about';
 }

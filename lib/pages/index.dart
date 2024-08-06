@@ -15,3 +15,5 @@ export 'sorts/insert_sort/index.dart';
 export 'sorts/quick_sort/index.dart';
 export 'sorts/selection_sort/index.dart';
 export 'sorts/two_roads_quick_sort/index.dart';
+
+export 'system/about/index.dart';

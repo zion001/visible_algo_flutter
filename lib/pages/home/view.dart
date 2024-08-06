@@ -59,7 +59,7 @@ class HomePage extends GetView<HomeController> {
             Icons.info_outline_rounded,
             color: Colors.white,
           ),
-          onTap: () {},
+          onTap: controller.onAboutTapped,
         ),
       ],
       flexibleSpace: const FlexibleSpaceBar(
