@@ -42,6 +42,11 @@ class HomeController extends GetxController {
       route: RouteNames.sortsSelectionSort,
     ),
     Item(
+      title: "插入排序",
+      subTitle: "顾名思义，就是把一个新的元素插入已排好序的数组形成一个新的已排好序的数组。",
+      route: RouteNames.sortsInsertSort,
+    ),
+    Item(
       title: "归并排序",
       subTitle: "一种简单的排序方法",
       route: RouteNames.sortsGuibingSort,
@@ -50,11 +55,6 @@ class HomeController extends GetxController {
       title: "堆排序",
       subTitle: "一种简单的排序方法",
       route: RouteNames.sortsHeapSort,
-    ),
-    Item(
-      title: "插入排序",
-      subTitle: "一种简单的排序方法",
-      route: RouteNames.sortsInsertSort,
     ),
     Item(
       title: "快速排序",
