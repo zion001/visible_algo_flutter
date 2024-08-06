@@ -48,9 +48,9 @@ class MazeController extends GetxController {
   // 画布Size
   double paintSize = Get.width - AppSpace.page * 2;
   // 地图规模列表
-  List<int> listMapSize = [10, 25, 50, 75];
+  List<int> listMapSize = [25, 50, 75];
   // 当前选中的地图规模
-  int selMapSize = 10;
+  int selMapSize = 25;
   // 算法列表
   List<String> listAlgorithm = ['算法A', '算法B', '算法C', ];
 

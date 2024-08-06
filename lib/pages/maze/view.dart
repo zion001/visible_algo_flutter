@@ -63,7 +63,7 @@ class MazePage extends GetView<MazeController> {
             ),
           ),
         ].toRow(),
-        const TextWidget.body2('生成算法'),
+        const TextWidget.body2('随机PRIM算法'),//TextWidget.body2('生成算法'),
         IgnorePointer(
           ignoring: controller.isRunning,
           child: ButtonWidget.textFilled(
@@ -95,7 +95,7 @@ class MazePage extends GetView<MazeController> {
       id: "maze",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("maze")),
+          appBar: AppBar(title: const Text("地图生成及寻找路径")),
           body: SafeArea(
             child: _buildView(),
           ),
