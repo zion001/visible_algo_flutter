@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:visible_algo_flutter/common/index.dart';
 import 'package:visible_algo_flutter/pages/maze/map_algorithm/random_prim/random_prim.dart';
@@ -125,6 +126,14 @@ class MazeController extends GetxController {
     });
   }
 
+  void searchBtnTapped() {
+    if ( !isMapAvailable(mapCells) ) {
+      EasyLoading.showError('请先生成地图');
+      return;
+    }
+    searchPath();
+  }
+
   //导找路径
   void searchPath() {
     isRunning = true;
@@ -141,6 +150,25 @@ class MazeController extends GetxController {
       isRunning = false;
       update(["maze"]);
     });
+  }
+
+  //判断是否有正常的地图
+  bool isMapAvailable( List<List<MapCell>> mapCells) {
+    if (mapCells.isEmpty) {
+      return false;
+    }
+    if (mapCells.first.isEmpty) {
+      return false;
+    }
+    MapCell cell = mapCells.first.first;
+    if (!cell.isOpen(direction: MyDirection.left) &&
+      !cell.isOpen(direction: MyDirection.top) &&
+      !cell.isOpen(direction: MyDirection.right) &&
+      !cell.isOpen(direction: MyDirection.bottom) 
+    ) {
+      return false;
+    }
+    return true;
   }
 
 

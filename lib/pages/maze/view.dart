@@ -78,12 +78,15 @@ class MazePage extends GetView<MazeController> {
       const Divider(
         thickness: 0.5,
       ),
-      ButtonWidget.textFilled(
+      IgnorePointer(
+        ignoring: controller.isRunning,
+        child: ButtonWidget.textFilled(
         '寻找路径',
         textColor: Colors.white,
         bgColor: controller.isRunning ? Colors.black38 : AppColors.primary,
         height: 40,
-        onTap: controller.searchPath,
+        onTap: controller.searchBtnTapped,
+      ),
       ),
     ].toListView().paddingHorizontal(AppSpace.page);
   }
