@@ -7,6 +7,7 @@ enum SearchResult {
   failed, //搜索失败，没有路径
   searching, //搜索仍在进行中
   finished, //搜索成功，找到路径
+  stop, //外部要求停止
 }
 
 /// 深度优先搜索路径
@@ -14,6 +15,7 @@ enum SearchResult {
 typedef CallBackSearchPath = void Function(List<Point<int>> tempPath, List<Point<int>> failedPath); // 搜索路径
 typedef CallBackFinishSearch = void Function(); // 搜索完成
 typedef CallBackFailedSearch = void Function(); // 搜索失败
+typedef CallBackStop = void Function(); // 停止
 
 class DeepFirstPath {
   // 单例
@@ -22,11 +24,17 @@ class DeepFirstPath {
     return _shared;
   }
   DeepFirstPath._internal();
-
+  // 停止标记
+  bool _setStop = false;
   // 暂存路径
   List<Point<int>> stackTempPath = [];
   // 已搜索但走不通的路径
   List<Point<int>> failedPath = [];
+
+  // 停止
+  void stop() {
+    _setStop = true;
+  }
 
   // 寻找路径
   Future<void> searchPath(
@@ -35,10 +43,12 @@ class DeepFirstPath {
     required CallBackSearchPath searchCallBack,
     required CallBackFinishSearch finishCallBack,
     required CallBackFailedSearch failedCallBack,
+    required CallBackStop stopCallBack,
   }) async {
     // 重置
     stackTempPath.clear();
     failedPath.clear();
+    _setStop = false;
     // 将起点放入暂存
     stackTempPath.add(Point(0, 0));
 
@@ -59,14 +69,25 @@ class DeepFirstPath {
         case SearchResult.finished:
           finishCallBack();
           break;
+        case SearchResult.stop:
+          // 重置
+          stackTempPath.clear();
+          failedPath.clear();
+          stopCallBack();
+          break;
       }
     } while (searchResult != SearchResult.failed &&
-        searchResult != SearchResult.finished);
+        searchResult != SearchResult.finished && 
+        searchResult != SearchResult.stop);
   }
 
   //找指定单元格的邻居，如果可通行，则将邻居放到暂存路径，并进入下一次
   SearchResult _searhOneStep(
       {required List<List<MapCell>> map, required Point<int> ptCell}) {
+        // 要求停止
+        if (_setStop) {
+          return SearchResult.stop;
+        }
     //左
     if (_isOpen(map: map, ptCell: ptCell, direction: MyDirection.left)) {
       Point<int> neighbor =
@@ -143,4 +164,6 @@ class DeepFirstPath {
         return ptCell + Point(0, 1);
     }
   }
+
+
 }

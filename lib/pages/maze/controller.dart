@@ -86,10 +86,11 @@ class MazeController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    DeepFirstPath().stop();
+  }
 
 /*
   // 选中地图规模
@@ -149,7 +150,10 @@ class MazeController extends GetxController {
       print("搜索失败");  
       isRunning = false;
       update(["maze"]);
-    });
+    }, stopCallBack: () {
+      print("停止搜索");
+      isRunning = false;
+    },);
   }
 
   //判断是否有正常的地图
